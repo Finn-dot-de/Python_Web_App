@@ -7,11 +7,14 @@
 </head>
 <body>
     <h1>Notizbuch</h1>
-    <form id="noteForm">
-        <input type="text" id="noteInput" placeholder="Notiz eingeben">
+    <form action="/api/notes" method="post">
+        <input type="text" name="note" placeholder="Notiz eingeben">
         <button type="submit">Hinzufügen</button>
     </form>
-    <ul style="list-style: none;" id="noteList"></ul>
-
+    <ul style="list-style: none;">
+        {% for index, note in enumerate(notes) %}
+            <li>{{ index + 1 }}. {{ note }}</li>
+        {% end %}
+    </ul>
 </body>
 </html>

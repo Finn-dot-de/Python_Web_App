@@ -20,20 +20,20 @@ class MainHandler(tornado.web.RequestHandler):
 
 class NoteHandler(tornado.web.RequestHandler):
     def post(self):
-        new_note = tornado.escape.json_decode(self.request.body)
+        new_note = self.get_body_argument("note")
         notes = self.load_notes()
         notes.append(new_note)
         self.save_notes(notes)
-        self.set_status(201)  # HTTP-Statuscode für "Created"
+        self.redirect("/")
 
     def delete(self, note_id):
         notes = self.load_notes()
         try:
             del notes[int(note_id)]
             self.save_notes(notes)
-            self.set_status(204)  # HTTP-Statuscode für "No Content"
         except IndexError:
-            self.set_status(404)  # HTTP-Statuscode für "Not Found"
+            pass
+        self.redirect("/")
 
     def load_notes(self):
         if os.path.exists(NOTES_FILE):
@@ -46,7 +46,6 @@ class NoteHandler(tornado.web.RequestHandler):
     def save_notes(self, notes):
         with open(NOTES_FILE, "w") as f:
             json.dump(notes, f)
-
 
 def make_app():
     return tornado.web.Application([
