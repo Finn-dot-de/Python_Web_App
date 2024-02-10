@@ -5,6 +5,7 @@ import os
 
 NOTES_FILE = "notes.json"
 
+
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         notes = self.load_notes()
@@ -18,8 +19,16 @@ class MainHandler(tornado.web.RequestHandler):
             notes = []
         return notes
 
+
 class NoteHandler(tornado.web.RequestHandler):
-    def post(self, note_id):
+    def post(self):
+        new_note = self.get_body_argument("note")
+        notes = self.load_notes()
+        notes.append(new_note)
+        self.save_notes(notes)
+        self.redirect("/")
+
+    def post_with_id(self, note_id):
         notes = self.load_notes()
         try:
             del notes[int(note_id)]
@@ -49,12 +58,25 @@ class NoteHandler(tornado.web.RequestHandler):
         with open(NOTES_FILE, "w") as f:
             json.dump(notes, f)
 
+    def post(
+        self, note_id=None
+    ):  # Fügt die Post-Methode für Anfragen an /api/notes/<id> hinzu
+        if note_id is not None:
+            self.post_with_id(note_id)
+        else:
+            super().post()
+
+
 def make_app():
-    return tornado.web.Application([
-        (r"/", MainHandler),
-        (r"/api/notes", NoteHandler),
-        (r"/api/notes/(\d+)", NoteHandler),
-    ], template_path=os.path.join(os.path.dirname(__file__), "templates"))
+    return tornado.web.Application(
+        [
+            (r"/", MainHandler),
+            (r"/api/notes", NoteHandler),
+            (r"/api/notes/(\d+)", NoteHandler),
+        ],
+        template_path=os.path.join(os.path.dirname(__file__), "templates"),
+    )
+
 
 if __name__ == "__main__":
     if not os.path.exists(NOTES_FILE):
