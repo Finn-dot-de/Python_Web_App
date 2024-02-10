@@ -58,9 +58,7 @@ class NoteHandler(tornado.web.RequestHandler):
         with open(NOTES_FILE, "w") as f:
             json.dump(notes, f)
 
-    def post(
-        self, note_id=None
-    ):  # Fügt die Post-Methode für Anfragen an /api/notes/<id> hinzu
+    def post(self, note_id=None):
         if note_id is not None:
             self.post_with_id(note_id)
         else:
