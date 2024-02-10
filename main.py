@@ -19,21 +19,23 @@ class MainHandler(tornado.web.RequestHandler):
         return notes
 
 class NoteHandler(tornado.web.RequestHandler):
-    def post(self):
-        new_note = self.get_body_argument("note")
+    def post(self, note_id):
         notes = self.load_notes()
-        notes.append(new_note)
-        self.save_notes(notes)
-        self.redirect("/")
+        try:
+            del notes[int(note_id)]
+            self.save_notes(notes)
+            self.redirect("/")
+        except IndexError:
+            pass
 
     def delete(self, note_id):
         notes = self.load_notes()
         try:
             del notes[int(note_id)]
             self.save_notes(notes)
+            self.redirect("/")
         except IndexError:
             pass
-        self.redirect("/")
 
     def load_notes(self):
         if os.path.exists(NOTES_FILE):
