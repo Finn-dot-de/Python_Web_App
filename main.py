@@ -5,7 +5,6 @@ import os
 
 NOTES_FILE = "notes.json"
 
-
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         notes = self.load_notes()
