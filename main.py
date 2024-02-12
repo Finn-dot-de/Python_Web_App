@@ -20,12 +20,15 @@ class MainHandler(tornado.web.RequestHandler):
 
 
 class NoteHandler(tornado.web.RequestHandler):
-    def post(self):
-        new_note = self.get_body_argument("note")
-        notes = self.load_notes()
-        notes.append(new_note)
-        self.save_notes(notes)
-        self.redirect("/")
+    def post(self, note_id=None):
+        if note_id is not None:
+            self.post_with_id(note_id)
+        else:
+            new_note = self.get_body_argument("note")
+            notes = self.load_notes()
+            notes.append(new_note)
+            self.save_notes(notes)
+            self.redirect("/")
 
     def post_with_id(self, note_id):
         notes = self.load_notes()
@@ -57,7 +60,7 @@ class NoteHandler(tornado.web.RequestHandler):
         with open(NOTES_FILE, "w") as f:
             json.dump(notes, f)
 
-    def post(self, note_id=None):
+    def posts(self, note_id=None):
         if note_id is not None:
             self.post_with_id(note_id)
         else:
