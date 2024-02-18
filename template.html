@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,26 +32,21 @@
       <thead>
         <tr>
           <td>Datum</td>
-          <td>Mitarbeiter1</td>
-          <td>Mitarbeiter2</td>
-          <td>Mitarbeiter3</td>
+          {% for employee_id, employee_name in employee_list.items() %}
+          <td>{{ employee_name }}</td>
+          {% end %}
         </tr>
       </thead>
       <tbody>
-        {% for entry in employee_entries %}
+        {% for date, employee_data in employee_entries.items() %}
         <tr>
+          <td>{{ date }}</td>
+          {% for employee_id, status in employee_data.items() %}
           <td>
-            {% if entry[1] == 0 %} Abwesend {% elif entry[1] == 1 %} Einsatz {%
-            else %} Noch nicht eingetragen {% end %}
+            {% if status == 0 %} Abwesend {% elif status == 1 %} Einsatz {% else
+            %} Noch nicht eingetragen {% end %}
           </td>
-          <td>
-            {% if entry[2] == 0 %} Abwesend {% elif entry[2] == 1 %} Einsatz {%
-            else %} Noch nicht eingetragen {% end %}
-          </td>
-          <td>
-            {% if entry[3] == 0 %} Abwesend {% elif entry[3] == 1 %} Einsatz {%
-            else %} Noch nicht eingetragen {% end %}
-          </td>
+          {% end %}
         </tr>
         {% end %}
       </tbody>
