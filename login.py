@@ -48,12 +48,11 @@ class LoginHandler(tornado.web.RequestHandler):
         username = self.get_argument("name")
         password = self.get_argument("password")
 
-        # Benutzerdaten aus der Datenbank abrufen
         user = login(username, password)
 
         if user and verify_password(
             password, user[1]
-        ):  # Annahme: user[1] enthält den gehashten Passwortwert
+        ): 
             self.write("Login erfolgreich!")
         else:
             self.write("Login fehlgeschlagen!")

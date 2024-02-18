@@ -10,14 +10,14 @@ def draw_christmas_tree(height):
 
 def draw_decorated_tree(height):
     trunk_height = height // 4
-    max_width = 2 * height - 1  # Maximale Breite des Baumes
+    max_width = 2 * height - 1 
     for i in range(1, height + 1):
         spaces = ' ' * (height - i)
         stars = '*' * (2 * i - 1)
         decorations = ''
         for _ in range(max_width - len(stars)):
-            if random.random() < 0.3:  # Wahrscheinlichkeit für Dekorationen
-                decoration = random.choice(['o', 'I', 'x'])  # Zufällige Auswahl der Dekoration
+            if random.random() < 0.3: 
+                decoration = random.choice(['o', 'I', 'x'])
                 decorations += decoration
             else:
                 decorations += ' '

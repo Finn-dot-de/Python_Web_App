@@ -1,7 +1,6 @@
 import mysql.connector
 from datetime import datetime, timedelta
 
-# Verbindung zur MySQL-Datenbank herstellen
 db_connection = mysql.connector.connect(
     host="localhost",
     user="ly04",

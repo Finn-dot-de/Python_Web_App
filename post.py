@@ -1,7 +1,6 @@
 import psycopg2
 from datetime import datetime, timedelta
 
-# Verbindung zur Postgres-Datenbank herstellen
 conn = psycopg2.connect(
     host="localhost",
     user="ly04",
