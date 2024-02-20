@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Berufsschulblöcke | ESAP</title>
+    <!-- <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="styles/test-fonts.css" />
+    <link rel="stylesheet" href="styles/test.css" />
+    <link rel="stylesheet" href="styles/test-fixes.css" /> -->
+    <style>
+      /* styles.css */
+
+      /* Allgemeine Formatierung */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Header-Styling */
+      .test-header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 20px;
+      }
+
+      .test-header__title {
+        text-decoration: none;
+        color: #fff;
+        display: flex;
+        align-items: center;
+      }
+
+      .test-header__title div {
+        margin-left: 10px;
+      }
+
+      /* Hauptnavigation-Styling */
+      .test-header-navbar {
+        display: flex;
+      }
+
+      .test-header-navbar__content {
+        display: flex;
+        margin-left: auto;
+      }
+
+      .test-header__nav-item {
+        margin-right: 20px;
+      }
+
+      .test-header__anchor {
+        text-decoration: none;
+        color: #fff;
+      }
+
+      .test-header__nav-item--active .test-header__anchor {
+        font-weight: bold;
+      }
+
+      /* Formular-Styling */
+      .test-card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        padding: 20px;
+      }
+
+      .test-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        grid-gap: 20px;
+      }
+
+      .test-col-3 {
+        grid-column: span 3;
+      }
+
+      .test-label {
+        font-weight: bold;
+      }
+
+      .test-input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        margin-top: 5px;
+      }
+
+      .test-button-group {
+        margin-top: 20px;
+      }
+
+      .test-button {
+        padding: 10px 20px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      /* Tabelle-Styling */
+      .test-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .test-table th,
+      .test-table td {
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+
+      .test-table th {
+        background-color: #333;
+        color: #fff;
+        text-align: left;
+      }
+
+      .test-table__wrapper {
+        overflow-x: auto;
+      }
+    </style>
+  </head>
+
+  <body class="test-app test-it">
+    <header class="test-header">
+      <div class="test-header__row--first">
+        <a href="index.html" title="Startseite" class="test-header__title">
+          <div aria-hidden="true">test</div>
+          <div aria-hidden="true">
+            <div>Einsatz- und Abwesenheitsplanung</div>
+            <div>von Mitarbeiter</div>
+          </div>
+        </a>
+        <div class="test-header__usermenu-wrapper">
+          <span class="test-usermenu__button-text">Hallo, Anton Ausbilder</span>
+          <span
+            class="icon pfeileinklappen"
+            style="transform: rotateX(180deg)"
+          ></span>
+        </div>
+      </div>
+      <hr class="test-header__row--accent" />
+      <nav aria-label="Hauptnavigation zwischen Design System und Vorlagen">
+        <div class="test-header-navbar">
+          <div class="test-header-navbar__content ng-star-inserted">
+            <div class="test-header__nav-item">
+              <a class="test-header__anchor" href="index.html">Übersicht</a>
+            </div>
+            <div class="test-header__nav-item">
+              <a class="test-header__anchor" href="abwesenheiten.html"
+                >Abwesenheiten</a
+              >
+            </div>
+            <div class="test-header__nav-item test-header__nav-item--active">
+              <a class="test-header__anchor" href="berufsschulbloecke.html"
+                >Berufsschulblöcke</a
+              >
+            </div>
+            <div class="test-header__nav-item">
+              <a class="test-header__anchor" href="einsaetze.html">Einsätze</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="test-main">
+      <h1>Berufsschulblöcke</h1>
+      <div class="test-card">
+        <h2>Neuen Berufsschulblock erfassen</h2>
+        <form action="/einsatz_erfassen" method="post">
+          <div class="test-grid">
+            <div class="test-col-3" style="min-width: 220px">
+              <label for="inp-von" class="test-label test-label--required"
+                >Von</label
+              >
+              <input type="date" id="inp-von" name="von" class="test-input" />
+            </div>
+            <div class="test-col-3" style="min-width: 220px">
+              <label for="inp-bis" class="test-label test-label--required"
+                >Bis</label
+              >
+              <input type="date" id="inp-bis" name="bis" class="test-input" />
+            </div>
+          </div>
+          <div class="test-grid">
+            <div
+              role="group"
+              id="cbg-azubis"
+              aria-labelledby="lbl-azubis"
+              class="test-col-12"
+            >
+              <label id="lbl-azubis" for="azubi_listbox" class="test-label"
+                >Auszubildende</label
+              >
+              <div style="min-width: 220px">
+                <ul class="dropdown-options" id="azubi_listbox">
+                    <!-- Azubis werden hier dynamisch generiert -->
+                    {% for azubi in azubis %}
+                    <li class="test-dropdown-option">
+                        <label class="test-label nowrap">
+                            <input
+                                type="checkbox"
+                                name="azubi"
+                                class="test-checkbox"
+                                value="{{ azubi[0] }}"
+                            />
+                            {{ azubi[1] }} ({{ azubi[0] }}) <!-- Korrigieren Sie hier -->
+                        </label>
+                    </li>
+                    {% end %}
+                </ul>
+            </div>
+            
+            </div>
+          </div>
+          <div class="test-button-group">
+            <button type="submit" class="test-button test-button--primary">
+              Erfassen
+            </button>
+          </div>
+        </form>
+      </div>
+      <!-- einsaetze_template.html -->
+      <div class="test-card">
+        <h2>Erfasste Einsätze</h2>
+        <div class="test-table__wrapper">
+          <table class="test-table" style="width: 100%">
+            <thead role="rowgroup">
+              <tr class="test-header-row">
+                <th class="test-header-cell" role="columnheader">Von</th>
+                <th class="test-header-cell" role="columnheader">Bis</th>
+                <th class="test-header-cell" role="columnheader">
+                  Auszubildende
+                </th>
+                <th
+                  class="test-header-cell test-column-actions"
+                  role="columnheader"
+                >
+                  Aktionen
+                </th>
+              </tr>
+            </thead>
+            <tbody role="rowgroup">
+              {% for einsatz in einsaetze %}
+              <tr role="row" class="test-row">
+                <td class="test-cell">{{ einsatz[0] }}</td>
+                <!-- Startdatum -->
+                <td class="test-cell">{{ einsatz[1] }}</td>
+                <!-- Enddatum -->
+                <td class="test-cell">
+                  {% for azubi in azubis %}
+                      {% if azubi[0] == einsatz[0] %}
+                          {{ azubi[1] }} ({{ azubi[0] }}),
+                      {% end %}
+                  {% end %}
+              </td>
+              
+                <!-- Azubis -->
+                <td class="test-cell test-column-actions">
+                  <button class="test-icon-button" title="Löschen">
+                    <span aria-hidden="true" class="icon loeschen"></span>
+                  </button>
+                </td>
+              </tr>
+              {% end %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+    <footer class="test-footer">
+      <span class="test-footer__item">
+        <span>IT- und Liegenschaft-Ticketsystem:&nbsp;</span
+        ><span
+          ><a
+            href="http://ticketsystem.server.intern/pls/htmldb/f?p=103"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="test-link nowrap"
+            >direkt Ticket erstellen</a
+          >
+          &nbsp;
+          <span aria-hidden="true" class="icon itticket"></span> &nbsp; </span
+        ><span
+          >oder
+          <span aria-hidden="true" class="icon telefon"></span> telefonisch
+          unter 0911 / 0000000</span
+        ></span
+      ><span class="test-footer__item"
+        ><span class="nowrap">&copy; 2024</span></span
+      ><span class="test-footer__item">v0.1.0</span>
+    </footer>
+  </body>
+</html>
